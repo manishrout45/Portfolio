@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gradient-to-r from-green-400 via-teal-500 to-blue-600 text-white font-sans">
+
+    <!-- Navigation -->
+    <nav class="p-5 bg-black bg-opacity-50 shadow-lg fixed w-full z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-blue-400">Your Name</a>
+            <ul class="flex space-x-6">
+                <li><a href="index.html" class="hover:text-pink-400">Home</a></li>
+                <li><a href="about.html" class="hover:text-pink-400">About</a></li>
+                <li><a href="services.html" class="hover:text-pink-400">Services</a></li>
+                <li><a href="projects.html" class="hover:text-pink-400">Projects</a></li>
+                <li><a href="contact.html" class="hover:text-pink-400">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+<!-- Hero Section -->
+<section class="flex items-center justify-center h-screen bg-cover bg-center relative" style="background-image: url('');">
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div> <!-- Gradient overlay -->
+    <div class="absolute inset-0 bg-cover bg-center filter blur-lg" style="background-image: url('/assets/hero.jpg');"></div> <!-- Background image with blur effect -->
+    <div class="text-center relative z-10">
+        <img src="assets/profile.jpg" alt="Your Name" class="w-32 h-32 mx-auto rounded-full border-4 border-pink-400 mb-6 hover:scale-110 transition-all">
+        <h1 class="text-6xl font-bold text-pink-400 animate-bounce">Hi, I'm Your Name</h1>
+        <p class="mt-4 text-xl text-gray-300">Web Developer | Designer | Digital Marketer</p>
+        <a href="contact.html" class="mt-8 inline-block px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-all">Get in Touch</a>
+    </div>
+</section>
+
+
+    <!-- About Section -->
+    <section class="py-20 px-6 bg-gray-800">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold text-pink-400 mb-12">About Me</h2>
+            <p class="text-lg text-gray-300 mb-8">I'm a passionate web developer with experience in building beautiful and functional websites. I specialize in frontend and backend development, UI/UX design, and digital marketing strategies.</p>
+            <a href="about.html" class="inline-block px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-all">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="py-20 px-6 bg-gray-900">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-pink-400 mb-12 text-center">Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-black bg-opacity-50 p-8 rounded-lg shadow-lg hover:scale-105 transition-all">
+                    <h3 class="text-2xl font-bold mb-4">Web Development</h3>
+                    <p class="text-gray-300">HTML, CSS, JavaScript, React, Node.js, MongoDB</p>
+                </div>
+                <div class="bg-black bg-opacity-50 p-8 rounded-lg shadow-lg hover:scale-105 transition-all">
+                    <h3 class="text-2xl font-bold mb-4">UI/UX Design</h3>
+                    <p class="text-gray-300">Figma, Photoshop, Adobe XD</p>
+                </div>
+                <div class="bg-black bg-opacity-50 p-8 rounded-lg shadow-lg hover:scale-105 transition-all">
+                    <h3 class="text-2xl font-bold mb-4">Digital Marketing</h3>
+                    <p class="text-gray-300">SEO, Social Media Marketing, Email Marketing</p>
+                </div>
+                <div class="bg-black bg-opacity-50 p-8 rounded-lg shadow-lg hover:scale-105 transition-all">
+                    <h3 class="text-2xl font-bold mb-4">Logo Design</h3>
+                    <p class="text-gray-300">Creative and modern logo designs for brands</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 px-6 bg-gray-800">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold text-pink-400 mb-12">Client Testimonials</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-black bg-opacity-50 p-8 rounded-lg shadow-lg">
+                    <p class="text-lg text-gray-300 mb-4">"Your Name did an amazing job! The website they built is fast, beautiful, and functional. Highly recommended!"</p>
+                    <p class="text-xl font-bold text-pink-400">Client 1</p>
+                </div>
+                <div class="bg-black bg-opacity-50 p-8 rounded-lg shadow-lg">
+                    <p class="text-lg text-gray-300 mb-4">"Excellent work! The digital marketing strategies they created helped us grow our brand significantly."</p>
+                    <p class="text-xl font-bold text-pink-400">Client 2</p>
+                </div>
+                <div class="bg-black bg-opacity-50 p-8 rounded-lg shadow-lg">
+                    <p class="text-lg text-gray-300 mb-4">"A truly professional web developer. They understood our needs and delivered exactly what we wanted!"</p>
+                    <p class="text-xl font-bold text-pink-400">Client 3</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="py-20 px-6 bg-gray-900">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold text-pink-400 mb-6">Let's Work Together!</h2>
+            <p class="text-xl text-gray-300 mb-8">I'm always excited to take on new projects. Let's create something amazing!</p>
+            <a href="contact.html" class="inline-block px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-all">Contact Me</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-6 bg-black bg-opacity-50 text-center">
+        <p>&copy; 2023 Your Name. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
