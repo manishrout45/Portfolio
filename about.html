@@ -34,100 +34,128 @@
 <body class="bg-gradient-to-r from-purple-900 via-indigo-900 to-blue-900 text-white font-sans">
 
     <!-- Navigation -->
-    <nav class="p-5 bg-black bg-opacity-50 shadow-lg fixed w-full z-50">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold text-pink-400">Your Name</a>
-            <ul class="flex space-x-6">
-                <li><a href="index.html" class="hover:text-pink-400">Home</a></li>
-                <li><a href="about.html" class="hover:text-pink-400">About</a></li>
-                <li><a href="services.html" class="hover:text-pink-400">Services</a></li>
-                <li><a href="projects.html" class="hover:text-pink-400">Projects</a></li>
-                <li><a href="contact.html" class="hover:text-pink-400">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+<nav class="p-5 bg-black bg-opacity-50 shadow-lg fixed w-full z-50">
+    <div class="container mx-auto flex justify-between items-center">
+        <!-- Mobile menu button (Hamburger icon) -->
+        <button id="mobile-menu-button" class="lg:hidden text-white text-2xl focus:outline-none">
+            <i class="fas fa-bars"></i>
+        </button>
 
-    <section class="py-20 px-6">
-        <div class="container mx-auto">
-            <h2 class="text-4xl font-bold text-pink-400 mb-12">About Me</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Who Am I? Section with Profile Image -->
-<div class="bg-black bg-opacity-50 p-8 rounded-lg shadow-lg hover:scale-105 transition-all">
-    <div class="flex items-center">
-        <img src="/assets/client2.jpg" alt="Your Name" class="w-32 h-32 rounded-full border-4 border-pink-400 mr-6">
-        <div>
-            <h3 class="text-2xl font-bold mb-4">Who Am I?</h3>
-            <p class="text-gray-300">I'm a passionate web developer and designer with expertise in HTML, CSS, JavaScript, React, Node.js, and MongoDB. I love creating beautiful and functional websites that leave a lasting impression.</p>
-        </div>
+        <!-- Logo -->
+        <a href="index.html" class="text-2xl font-bold text-blue-400">Your Name</a>
+
+        <!-- Desktop menu -->
+        <ul class="lg:flex hidden space-x-6 ml-auto">
+            <li><a href="index.html" class="hover:text-pink-400">Home</a></li>
+            <li><a href="about.html" class="hover:text-pink-400">About</a></li>
+            <li><a href="services.html" class="hover:text-pink-400">Services</a></li>
+            <li><a href="projects.html" class="hover:text-pink-400">Projects</a></li>
+            <li><a href="contact.html" class="hover:text-pink-400">Contact</a></li>
+        </ul>
     </div>
 
-    <!-- Social Media Icons Section -->
-    <div class="mt-6 flex justify-center space-x-6">
-        <!-- Instagram -->
-        <a href="https://www.instagram.com" target="_blank" class="text-pink-400 hover:text-pink-600 transition-colors">
-            <i class="fab fa-instagram text-3xl"></i>
-        </a>
-        <!-- LinkedIn -->
-        <a href="https://www.linkedin.com" target="_blank" class="text-pink-400 hover:text-pink-600 transition-colors">
-            <i class="fab fa-linkedin text-3xl"></i>
-        </a>
-        <!-- Twitter -->
-        <a href="https://www.twitter.com" target="_blank" class="text-pink-400 hover:text-pink-600 transition-colors">
-            <i class="fab fa-twitter text-3xl"></i>
-        </a>
-        <!-- GitHub -->
-        <a href="https://www.github.com" target="_blank" class="text-pink-400 hover:text-pink-600 transition-colors">
-            <i class="fab fa-github text-3xl"></i>
-        </a>
+    <!-- Mobile menu (Full-screen overlay) -->
+    <div id="mobile-nav" class="fixed inset-0 bg-black bg-opacity-90 flex flex-col items-center justify-center transform -translate-y-full transition-transform duration-300 ease-in-out">
+        <!-- Close button -->
+        <button id="close-menu" class="absolute top-5 right-5 text-white text-3xl">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <!-- MENU Heading -->
+        <h2 class="absolute top-6 left-7 text-white text-xl font-semibold">MENU</h2>
+
+        <!-- Mobile menu list with underlines -->
+        <ul class="space-y-6 text-white text-xl w-3/4 text-center -mt-20">
+            <li class="border-b border-white pb-2"><a href="index.html" class="hover:text-pink-400">Home</a></li>
+            <li class="border-b border-white pb-2"><a href="about.html" class="hover:text-pink-400">About</a></li>
+            <li class="border-b border-white pb-2"><a href="services.html" class="hover:text-pink-400">Services</a></li>
+            <li class="border-b border-white pb-2"><a href="projects.html" class="hover:text-pink-400">Projects</a></li>
+            <li class="border-b border-white pb-2"><a href="contact.html" class="hover:text-pink-400">Contact</a></li>
+        </ul>
     </div>
-</div>
+</nav>
 
+    <!-- About Me Section -->
+<section class="py-20 px-4 max-w-7xl mx-auto">
+    <div class="container mx-auto">
+        <h2 class="text-4xl font-bold text-pink-400 mb-12 text-center">About Me</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Who Am I? Section with Profile Image -->
+            <div class="bg-black bg-opacity-50 p-8 rounded-lg shadow-lg hover:scale-105 transition-all">
+                <div class="flex flex-col md:flex-row items-center md:items-start">
+                    <img src="/assets/client2.jpg" alt="Your Name" class="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-pink-400 mb-4 md:mb-0 md:mr-6 mt-16">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-pink-400 text-center md:text-left">Who Am I?</h3>
+                        <p class="text-gray-300 text-center md:text-left">Hi, I'm Manish Kumar Rout, an MCA graduate skilled in Java, web development, UI/UX, and graphic design. I build dynamic, user-friendly applications using React JS, Node JS, and MongoDB. Passionate about merging technology with creativity, I continuously learn and innovate. Beyond coding, I enjoy drawing and photo editing.</p>
+                    </div>
+                </div>
 
-                <!-- Skills Section with Attractive Design -->
-                <div class="bg-black bg-opacity-50 p-8 rounded-lg shadow-lg hover:scale-105 transition-all">
-                    <h3 class="text-2xl font-bold mb-4 text-pink-400">Skills</h3>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-                        <div class="skill-box hover:scale-105 transition-transform">
-                            <p class="text-gray-300 text-sm font-semibold">Web Development</p>
-                        </div>
-                        <div class="skill-box hover:scale-105 transition-transform">
-                            <p class="text-gray-300 text-sm font-semibold">UI/UX Design</p>
-                        </div>
-                        <div class="skill-box hover:scale-105 transition-transform">
-                            <p class="text-gray-300 text-sm font-semibold">Digital Marketing</p>
-                        </div>
-                        <div class="skill-box hover:scale-105 transition-transform">
-                            <p class="text-gray-300 text-sm font-semibold">Logo Design</p>
-                        </div>
-                        <div class="skill-box hover:scale-105 transition-transform">
-                            <p class="text-gray-300 text-sm font-semibold">SEO Optimization</p>
-                        </div>
-                        <div class="skill-box hover:scale-105 transition-transform">
-                            <p class="text-gray-300 text-sm font-semibold">Content Writing</p>
-                        </div>
-                        <div class="skill-box hover:scale-105 transition-transform">
-                            <p class="text-gray-300 text-sm font-semibold">React.js</p>
-                        </div>
-                        <div class="skill-box hover:scale-105 transition-transform">
-                            <p class="text-gray-300 text-sm font-semibold">Node.js</p>
-                        </div>
-                        <div class="skill-box hover:scale-105 transition-transform">
-                            <p class="text-gray-300 text-sm font-semibold">MongoDB</p>
-                        </div>
-                        <div class="skill-box hover:scale-105 transition-transform">
-                            <p class="text-gray-300 text-sm font-semibold">JavaScript</p>
-                        </div>
-                        <div class="skill-box hover:scale-105 transition-transform">
-                            <p class="text-gray-300 text-sm font-semibold">CSS</p>
-                        </div>
-                        <div class="skill-box hover:scale-105 transition-transform">
-                            <p class="text-gray-300 text-sm font-semibold">HTML</p>
-                        </div>
+                <!-- Social Media Icons Section -->
+                <div class="mt-6 flex justify-center md:justify-start space-x-6">
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com" target="_blank" class="text-pink-400 hover:text-pink-600 transition-colors">
+                        <i class="fab fa-instagram text-3xl"></i>
+                    </a>
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com" target="_blank" class="text-pink-400 hover:text-pink-600 transition-colors">
+                        <i class="fab fa-linkedin text-3xl"></i>
+                    </a>
+                    <!-- Twitter -->
+                    <a href="https://www.twitter.com" target="_blank" class="text-pink-400 hover:text-pink-600 transition-colors">
+                        <i class="fab fa-twitter text-3xl"></i>
+                    </a>
+                    <!-- GitHub -->
+                    <a href="https://www.github.com" target="_blank" class="text-pink-400 hover:text-pink-600 transition-colors">
+                        <i class="fab fa-github text-3xl"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Skills Section with Attractive Design -->
+            <div class="bg-black bg-opacity-50 p-8 rounded-lg shadow-lg hover:scale-105 transition-all">
+                <h3 class="text-2xl font-bold mb-4 text-pink-400">Skills</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <div class="skill-box hover:scale-105 transition-transform">
+                        <p class="text-gray-300 text-sm font-semibold">Web Development</p>
+                    </div>
+                    <div class="skill-box hover:scale-105 transition-transform">
+                        <p class="text-gray-300 text-sm font-semibold">UI/UX Design</p>
+                    </div>
+                    <div class="skill-box hover:scale-105 transition-transform">
+                        <p class="text-gray-300 text-sm font-semibold">Digital Marketing</p>
+                    </div>
+                    <div class="skill-box hover:scale-105 transition-transform">
+                        <p class="text-gray-300 text-sm font-semibold">Logo Design</p>
+                    </div>
+                    <div class="skill-box hover:scale-105 transition-transform">
+                        <p class="text-gray-300 text-sm font-semibold">SEO Optimization</p>
+                    </div>
+                    <div class="skill-box hover:scale-105 transition-transform">
+                        <p class="text-gray-300 text-sm font-semibold">Content Writing</p>
+                    </div>
+                    <div class="skill-box hover:scale-105 transition-transform">
+                        <p class="text-gray-300 text-sm font-semibold">React.js</p>
+                    </div>
+                    <div class="skill-box hover:scale-105 transition-transform">
+                        <p class="text-gray-300 text-sm font-semibold">Node.js</p>
+                    </div>
+                    <div class="skill-box hover:scale-105 transition-transform">
+                        <p class="text-gray-300 text-sm font-semibold">MongoDB</p>
+                    </div>
+                    <div class="skill-box hover:scale-105 transition-transform">
+                        <p class="text-gray-300 text-sm font-semibold">JavaScript</p>
+                    </div>
+                    <div class="skill-box hover:scale-105 transition-transform">
+                        <p class="text-gray-300 text-sm font-semibold">CSS</p>
+                    </div>
+                    <div class="skill-box hover:scale-105 transition-transform">
+                        <p class="text-gray-300 text-sm font-semibold">HTML</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 
     <!-- Timeline Section -->
@@ -143,8 +171,10 @@
                         <span class="font-semibold text-xl">1</span>
                     </div>
                     <div class="bg-black bg-opacity-50 p-8 rounded-lg shadow-lg w-full ml-12">
-                        <h3 class="text-2xl font-bold mb-4 text-pink-400">2019 - Start of My Journey</h3>
-                        <p class="text-gray-300">Started learning web development and design through online courses and tutorials. Developed my first personal website.</p>
+                        <h3 class="text-2xl font-bold mb-4 text-pink-400">•	2017-2019 – Intermediate in Science</h3>
+                        <p class="text-gray-300">Gopabandhu Science College, Athgarh, Cuttack, Orissa
+                            Developed a strong foundation in the sciences, fostering a problem-solving mindset that later proved invaluable in my journey as a developer.
+                            </p>
                     </div>
                 </div>
                 
@@ -154,8 +184,10 @@
                         <span class="font-semibold text-xl">2</span>
                     </div>
                     <div class="bg-black bg-opacity-50 p-8 rounded-lg shadow-lg w-full ml-12">
-                        <h3 class="text-2xl font-bold mb-4 text-pink-400">2020 - Professional Development</h3>
-                        <p class="text-gray-300">Became proficient in React, Node.js, and MongoDB. Worked on several freelance projects and built a portfolio.</p>
+                        <h3 class="text-2xl font-bold mb-4 text-pink-400">•	2019-2022 – Bachelor of Science</h3>
+                        <p class="text-gray-300">Gopabandhu Science College, Athgarh, Cuttack, Orissa
+                            Specialized in building analytical skills and a deep understanding of mathematics and logic, which laid the groundwork for my future studies and career in computer applications.
+                            </p>
                     </div>
                 </div>
 
@@ -165,8 +197,10 @@
                         <span class="font-semibold text-xl">3</span>
                     </div>
                     <div class="bg-black bg-opacity-50 p-8 rounded-lg shadow-lg w-full ml-12">
-                        <h3 class="text-2xl font-bold mb-4 text-pink-400">2021 - Expanding My Horizons</h3>
-                        <p class="text-gray-300">Launched several full-stack web applications. Enhanced my skills in UI/UX design and digital marketing.</p>
+                        <h3 class="text-2xl font-bold mb-4 text-pink-400">•	2022-2024 – Master in Computer Application (MCA)</h3>
+                        <p class="text-gray-300">Regional College of Management, Bhubaneswar, Orissa
+                            Equipped with advanced programming knowledge and development skills, my MCA studies played a key role in shaping my technical abilities and helping me specialize in web development.
+                            </p>
                     </div>
                 </div>
 
@@ -177,7 +211,7 @@
                     </div>
                     <div class="bg-black bg-opacity-50 p-8 rounded-lg shadow-lg w-full ml-12">
                         <h3 class="text-2xl font-bold mb-4 text-pink-400">Present - Ongoing Growth</h3>
-                        <p class="text-gray-300">Currently working on multiple projects, expanding my expertise in modern web technologies and collaborating with amazing clients.</p>
+                        <p class="text-gray-300">Currently working on multiple projects, expanding my expertise in modern web technologies, and collaborating with amazing clients. Continuously learning and evolving as I take on new challenges in the tech industry.</p>
                     </div>
                 </div>
             </div>
@@ -200,7 +234,7 @@
                             <p class="text-gray-400 text-xs italic">CEO, Company</p>
                         </div>
                     </div>
-                    <p class="text-white text-sm leading-relaxed mt-4">"Your Name is an amazing developer! He delivered the project on time."</p>
+                    <p class="text-white text-sm leading-relaxed mt-4">"Manish Kumar Rout is an amazing developer! <br>He delivered the project on time and exceeded our expectations <br>with his technical expertise and attention to detail."</p>
                     <div class="mt-auto text-pink-400 text-sm font-semibold">
                         <p>- Client A</p>
                     </div>
@@ -213,7 +247,7 @@
                             <p class="text-gray-400 text-xs italic">Lead Designer, Studio</p>
                         </div>
                     </div>
-                    <p class="text-white text-sm leading-relaxed mt-4">"The designs were stunning, and the website is very user-friendly!"</p>
+                    <p class="text-white text-sm leading-relaxed mt-4">"The designs were stunning, and the website is very  user-friendly!<br>  Manish's ability to blend creativity <br>  with functionality is unmatched."</p>
                     <div class="mt-auto text-pink-400 text-sm font-semibold">
                         <p>- Client B</p>
                     </div>
@@ -226,7 +260,7 @@
                             <p class="text-gray-400 text-xs italic">Project Manager, Firm</p>
                         </div>
                     </div>
-                    <p class="text-white text-sm leading-relaxed mt-4">"Great communication and professionalism. Will work with him again."</p>
+                    <p class="text-white text-sm leading-relaxed mt-4">"Great communication and professionalism. Manish was easy <br> to work with, understood our needs, and provided timely solutions.<br>  Will definitely work with him again."</p>
                     <div class="mt-auto text-pink-400 text-sm font-semibold">
                         <p>- Client C</p>
                     </div>
@@ -240,7 +274,7 @@
                             <p class="text-gray-400 text-xs italic">CEO, Company</p>
                         </div>
                     </div>
-                    <p class="text-white text-sm leading-relaxed mt-4">"Your Name is an amazing developer! He delivered the project on time."</p>
+                    <p class="text-white text-sm leading-relaxed mt-4">"Manish Kumar Rout is an amazing developer!<br> He delivered the project on time and exceeded our expectations <br> with his technical expertise and attention to detail."</p>
                     <div class="mt-auto text-pink-400 text-sm font-semibold">
                         <p>- Client A</p>
                     </div>
@@ -253,7 +287,7 @@
                             <p class="text-gray-400 text-xs italic">Lead Designer, Studio</p>
                         </div>
                     </div>
-                    <p class="text-white text-sm leading-relaxed mt-4">"The designs were stunning, and the website is very user-friendly!"</p>
+                    <p class="text-white text-sm leading-relaxed mt-4">"The designs were stunning, and the website is very user-friendly! <br> Manish's ability to blend creativity <br>  with functionality is unmatched."</p>
                     <div class="mt-auto text-pink-400 text-sm font-semibold">
                         <p>- Client B</p>
                     </div>
@@ -266,7 +300,7 @@
                             <p class="text-gray-400 text-xs italic">Project Manager, Firm</p>
                         </div>
                     </div>
-                    <p class="text-white text-sm leading-relaxed mt-4">"Great communication and professionalism. Will work with him again."</p>
+                    <p class="text-white text-sm leading-relaxed mt-4">"Great communication and professionalism. Manish was easy <br> to work with, understood our needs, and provided timely solutions.<br>  Will definitely work with him again."</p>
                     <div class="mt-auto text-pink-400 text-sm font-semibold">
                         <p>- Client C</p>
                     </div>
@@ -282,7 +316,9 @@
     <!-- Call to Action Section -->
     <section class="py-20 px-6 bg-gray-800 text-center">
         <h2 class="text-4xl font-bold text-pink-400 mb-6">Let's Work Together!</h2>
-        <p class="text-xl text-gray-300 mb-8">I'm always excited to take on new projects. Let's create something amazing together!</p>
+        <p class="text-xl text-gray-300 mb-8">I'm always excited to take on new projects and collaborate with passionate individuals and businesses. Whether you have a new idea or need help bringing an existing one to life, I’m here to help you create something amazing!
+            Feel free to reach out to discuss your project or ask any questions you may have. Let’s make something great together!
+            </p>
         <a href="contact.html" class="inline-block px-6 py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-all">Contact Me</a>
     </section>
 

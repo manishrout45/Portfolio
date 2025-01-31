@@ -5,32 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Your Name</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-gradient-to-r from-purple-900 via-indigo-900 to-blue-900 text-white font-sans">
 
     <!-- Navigation -->
-    <nav class="p-5 bg-black bg-opacity-50 shadow-lg fixed w-full z-50">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold text-pink-400">Your Name</a>
-            <ul class="flex space-x-6">
-                <li><a href="index.html" class="hover:text-pink-400">Home</a></li>
-                <li><a href="about.html" class="hover:text-pink-400">About</a></li>
-                <li><a href="services.html" class="hover:text-pink-400">Services</a></li>
-                <li><a href="projects.html" class="hover:text-pink-400">Projects</a></li>
-                <li><a href="contact.html" class="hover:text-pink-400">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+<nav class="p-5 bg-black bg-opacity-50 shadow-lg fixed w-full z-50">
+    <div class="container mx-auto flex justify-between items-center">
+        <!-- Mobile menu button (Hamburger icon) -->
+        <button id="mobile-menu-button" class="lg:hidden text-white text-2xl focus:outline-none">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Logo -->
+        <a href="index.html" class="text-2xl font-bold text-blue-400">Your Name</a>
+
+        <!-- Desktop menu -->
+        <ul class="lg:flex hidden space-x-6 ml-auto">
+            <li><a href="index.html" class="hover:text-pink-400">Home</a></li>
+            <li><a href="about.html" class="hover:text-pink-400">About</a></li>
+            <li><a href="services.html" class="hover:text-pink-400">Services</a></li>
+            <li><a href="projects.html" class="hover:text-pink-400">Projects</a></li>
+            <li><a href="contact.html" class="hover:text-pink-400">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Mobile menu (Full-screen overlay) -->
+    <div id="mobile-nav" class="fixed inset-0 bg-black bg-opacity-90 flex flex-col items-center justify-center transform -translate-y-full transition-transform duration-300 ease-in-out">
+        <!-- Close button -->
+        <button id="close-menu" class="absolute top-5 right-5 text-white text-3xl">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <!-- MENU Heading -->
+        <h2 class="absolute top-6 left-7 text-white text-xl font-semibold">MENU</h2>
+
+        <!-- Mobile menu list with underlines -->
+        <ul class="space-y-6 text-white text-xl w-3/4 text-center -mt-20">
+            <li class="border-b border-white pb-2"><a href="index.html" class="hover:text-pink-400">Home</a></li>
+            <li class="border-b border-white pb-2"><a href="about.html" class="hover:text-pink-400">About</a></li>
+            <li class="border-b border-white pb-2"><a href="services.html" class="hover:text-pink-400">Services</a></li>
+            <li class="border-b border-white pb-2"><a href="projects.html" class="hover:text-pink-400">Projects</a></li>
+            <li class="border-b border-white pb-2"><a href="contact.html" class="hover:text-pink-400">Contact</a></li>
+        </ul>
+    </div>
+</nav>
 
     <!-- Hero Section -->
-    <section class="py-20 px-6 text-center">
+    <section class="py-20 px-12 text-center ">
         <h2 class="text-4xl font-bold text-pink-400 mb-4">Showcasing My Projects</h2>
-        <p class="text-lg text-gray-300 mb-12">A collection of web development projects that I have worked on, showcasing my skills and passion for technology.</p>
+        <p class="text-lg text-gray-300 mb-6">A collection of web development projects that I have worked on, showcasing my skills and passion for technology.</p>
     </section>
 
     <!-- Projects Section -->
-    <section class="py-20 px-6">
+    <section class="py-2 px-6">
         <div class="container mx-auto">
             <h3 class="text-3xl font-bold text-pink-400 mb-12 text-center">Highlighted Projects</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -84,19 +113,20 @@
     </section>
 
     <!-- Technologies Used Section -->
-    <section class="py-20 px-6">
-        <div class="container mx-auto text-center">
-            <h3 class="text-3xl font-bold text-pink-400 mb-12">Technologies I've Worked With</h3>
-            <div class="flex flex-wrap justify-center space-x-8">
-                <span class="bg-black bg-opacity-50 p-4 rounded-lg text-lg text-gray-300">React</span>
-                <span class="bg-black bg-opacity-50 p-4 rounded-lg text-lg text-gray-300">Node.js</span>
-                <span class="bg-black bg-opacity-50 p-4 rounded-lg text-lg text-gray-300">MongoDB</span>
-                <span class="bg-black bg-opacity-50 p-4 rounded-lg text-lg text-gray-300">Tailwind CSS</span>
-                <span class="bg-black bg-opacity-50 p-4 rounded-lg text-lg text-gray-300">Express</span>
-                <span class="bg-black bg-opacity-50 p-4 rounded-lg text-lg text-gray-300">Firebase</span>
-            </div>
+<section class="py-20 px-4">
+    <div class="max-w-7xl mx-auto text-center">
+        <h3 class="text-3xl font-bold text-pink-400 mb-12">Technologies I've Worked With</h3>
+        <div class="flex flex-wrap justify-center gap-8">
+            <span class="bg-black bg-opacity-50 p-4 rounded-lg text-lg text-gray-300">React</span>
+            <span class="bg-black bg-opacity-50 p-4 rounded-lg text-lg text-gray-300">Node.js</span>
+            <span class="bg-black bg-opacity-50 p-4 rounded-lg text-lg text-gray-300">MongoDB</span>
+            <span class="bg-black bg-opacity-50 p-4 rounded-lg text-lg text-gray-300">Tailwind CSS</span>
+            <span class="bg-black bg-opacity-50 p-4 rounded-lg text-lg text-gray-300">Express</span>
+            <span class="bg-black bg-opacity-50 p-4 rounded-lg text-lg text-gray-300">Firebase</span>
         </div>
-    </section>
+    </div>
+</section>
+
 
     <!-- Footer -->
     <footer class="py-6 bg-black bg-opacity-50 text-center">

@@ -5,35 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services - Unique Layout</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-gradient-to-r from-purple-900 via-indigo-900 to-blue-900 text-white font-sans">
 
     <!-- Navigation -->
-    <nav class="p-5 bg-black bg-opacity-50 shadow-lg fixed w-full z-50">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold text-pink-400">Your Name</a>
-            <ul class="flex space-x-6">
-                <li><a href="index.html" class="hover:text-pink-400">Home</a></li>
-                <li><a href="about.html" class="hover:text-pink-400">About</a></li>
-                <li><a href="services.html" class="hover:text-pink-400">Services</a></li>
-                <li><a href="projects.html" class="hover:text-pink-400">Projects</a></li>
-                <li><a href="contact.html" class="hover:text-pink-400">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+<nav class="p-5 bg-black bg-opacity-50 shadow-lg fixed w-full z-50">
+    <div class="container mx-auto flex justify-between items-center">
+        <!-- Mobile menu button (Hamburger icon) -->
+        <button id="mobile-menu-button" class="lg:hidden text-white text-2xl focus:outline-none">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Logo -->
+        <a href="index.html" class="text-2xl font-bold text-blue-400">Your Name</a>
+
+        <!-- Desktop menu -->
+        <ul class="lg:flex hidden space-x-6 ml-auto">
+            <li><a href="index.html" class="hover:text-pink-400">Home</a></li>
+            <li><a href="about.html" class="hover:text-pink-400">About</a></li>
+            <li><a href="services.html" class="hover:text-pink-400">Services</a></li>
+            <li><a href="projects.html" class="hover:text-pink-400">Projects</a></li>
+            <li><a href="contact.html" class="hover:text-pink-400">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Mobile menu (Full-screen overlay) -->
+    <div id="mobile-nav" class="fixed inset-0 bg-black bg-opacity-90 flex flex-col items-center justify-center transform -translate-y-full transition-transform duration-300 ease-in-out">
+        <!-- Close button -->
+        <button id="close-menu" class="absolute top-5 right-5 text-white text-3xl">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <!-- MENU Heading -->
+        <h2 class="absolute top-6 left-7 text-white text-xl font-semibold">MENU</h2>
+
+        <!-- Mobile menu list with underlines -->
+        <ul class="space-y-6 text-white text-xl w-3/4 text-center -mt-20">
+            <li class="border-b border-white pb-2"><a href="index.html" class="hover:text-pink-400">Home</a></li>
+            <li class="border-b border-white pb-2"><a href="about.html" class="hover:text-pink-400">About</a></li>
+            <li class="border-b border-white pb-2"><a href="services.html" class="hover:text-pink-400">Services</a></li>
+            <li class="border-b border-white pb-2"><a href="projects.html" class="hover:text-pink-400">Projects</a></li>
+            <li class="border-b border-white pb-2"><a href="contact.html" class="hover:text-pink-400">Contact</a></li>
+        </ul>
+    </div>
+</nav>
 
     <!-- Services Section -->
-    <section class="py-20 px-6 bg-black bg-opacity-50">
-        <div class="container mx-auto flex items-center gap-8">
-            <div class="w-full md:w-1/2">
-                <h2 class="text-4xl font-bold text-pink-400 mb-8">Our Services</h2>
-                <p class="text-gray-300 mb-4">We provide top-notch web development and UI/UX design services to help your business grow.</p>
-                <p class="text-gray-300">Whether you need a website redesign or custom-built features, we have the expertise to deliver high-quality results that exceed expectations.</p>
-            </div>
-            <img src="/assets/services.jpg" alt="Service 1" class="w-48 h-48 rounded-full shadow-xl md:w-64 md:h-64 mx-auto cursor-pointer">
+<section class="py-20 px-4 bg-black bg-opacity-50">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8">
+        <div class="w-full md:w-1/2">
+            <h2 class="text-4xl font-bold text-pink-400 mb-8 text-center md:text-left">Our Services</h2>
+            <p class="text-gray-300 mb-4 text-center md:text-left">We provide top-notch web development and UI/UX design services to help your business grow.</p>
+            <p class="text-gray-300 text-center md:text-left">Whether you need a website redesign, custom-built features, or a brand-new digital solution, we have the expertise to deliver high-quality results that exceed expectations. We focus on creating seamless user experiences and robust websites that drive engagement and business success.</p>
         </div>
-    </section>
+        <img src="/assets/services.jpg" alt="Service 1" class="w-48 h-48 rounded-full shadow-xl md:w-64 md:h-64 mx-auto cursor-pointer">
+    </div>
+</section>
+
 
     <!-- Why Choose Us Section -->
     <section class="py-20 px-6">
@@ -98,10 +128,11 @@
     <section class="py-20 px-6">
         <div class="container mx-auto text-center">
             <h2 class="text-4xl font-bold text-pink-400 mb-8">Get in Touch</h2>
-            <p class="text-gray-300 mb-4">We’d love to hear from you! Reach out to us for any inquiries or project discussions.</p>
+            <p class="text-gray-300 mb-4">I'm always excited to take on new projects and collaborate with passionate individuals and businesses. Whether you have a new idea or need help bringing an existing one to life, I’m here to help you create something amazing!
+                Feel free to reach out to discuss your project or ask any questions you may have. Let’s make something great together!</p>
             <a href="contact.html" class="inline-block bg-pink-400 text-black font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-pink-500">Contact Us</a>
         </div>
     </section>
-
+    <script src="script.js"></script>
 </body>
 </html>
