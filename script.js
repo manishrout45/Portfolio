@@ -27,3 +27,32 @@ document.addEventListener('scroll', () => {
 
 
 
+
+
+
+//contact form
+(function(){
+    emailjs.init("fEU-TIIKhblkEzyRu"); // Replace with your EmailJS Public Key
+})();
+
+document.getElementById("contact-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    // Get form values
+    var templateParams = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        message: document.getElementById("message").value
+    };
+
+    // Send email using EmailJS
+    emailjs.send("service_n8m2tf2", "template_mg8zy2e", templateParams)
+    .then(function(response) {
+        document.getElementById("status-message").innerHTML = "Message sent successfully!";
+        document.getElementById("status-message").classList.add("text-green-400");
+        document.getElementById("contact-form").reset();
+    }, function(error) {
+        document.getElementById("status-message").innerHTML = "Failed to send message. Try again later.";
+        document.getElementById("status-message").classList.add("text-red-400");
+    });
+});
