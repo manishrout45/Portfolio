@@ -56,3 +56,14 @@ document.getElementById("contact-form").addEventListener("submit", function(even
         document.getElementById("status-message").classList.add("text-red-400");
     });
 });
+
+
+
+
+
+function openPopup(id) {
+    document.getElementById(id).classList.remove('hidden');
+}
+function closePopup(id) {
+    document.getElementById(id).classList.add('hidden');
+}

@@ -54,37 +54,79 @@
 
     <!-- Hero Section -->
     <section class="py-20 px-12 text-center ">
-        <h2 class="text-4xl font-bold text-purple-600 mb-4">Showcasing My Projects</h2>
+        <h2 class="text-4xl font-bold text-lime-400 mb-4">Showcasing My Projects</h2>
         <p class="text-lg text-gray-300 mb-6">A collection of web development projects that I have worked on, showcasing my skills and passion for technology.</p>
     </section>
 
-    <!-- Projects Section -->
-    <section class="py-2 px-6">
-        <div class="container mx-auto">
-            <h3 class="text-3xl font-bold text-lime-400 mb-12 text-center">Highlighted Projects</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-black bg-opacity-50 p-8 rounded-lg shadow-lg hover:scale-105 transition-all">
-                    <img src="assets/project1.jpg" alt="Project 1" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <h4 class="text-2xl font-bold mb-4">E-Commerce Website</h4>
-                    <p class="text-gray-300">A fully responsive e-commerce website built with React and Node.js.</p>
-                    <a href="project1-details.html" class="text-blue-400 hover:underline">Learn More</a>
-                </div>
-                <div class="bg-black bg-opacity-50 p-8 rounded-lg shadow-lg hover:scale-105 transition-all">
-                    <img src="assets/project2.jpg" alt="Project 2" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <h4 class="text-2xl font-bold mb-4">Portfolio Website</h4>
-                    <p class="text-gray-300">A modern portfolio website with custom animations and Tailwind CSS.</p>
-                    <a href="project2-details.html" class="text-blue-400 hover:underline">Learn More</a>
-                </div>
-                <div class="bg-black bg-opacity-50 p-8 rounded-lg shadow-lg hover:scale-105 transition-all">
-                    <img src="assets/project3.jpg" alt="Project 3" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <h4 class="text-2xl font-bold mb-4">Blog Platform</h4>
-                    <p class="text-gray-300">A blog platform with user authentication and MongoDB integration.</p>
-                    <a href="project3-details.html" class="text-blue-400 hover:underline">Learn More</a>
-                </div>
+<!-- Projects Section -->
+<section class="py-12 px-6 bg-gray-900 text-white">
+    <div class="container mx-auto">
+        <h3 class="text-4xl font-extrabold text-lime-400 mb-12 text-center uppercase tracking-wide">Highlighted Projects</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="bg-gray-800 p-6 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+                <img src="/assets/TechWeb.png" alt="Project 1" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h4 class="text-2xl font-bold mb-2">Education Website</h4>
+                <p class="text-gray-400 mb-4">A fully responsive Educational website built with TypeScript and Node.js.</p>
+                <button onclick="openPopup('popup1')" class="text-blue-400 hover:text-blue-500 transition-colors">Learn More</button>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+                <img src="assets/project2.jpg" alt="Project 2" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h4 class="text-2xl font-bold mb-2">Portfolio Website</h4>
+                <p class="text-gray-400 mb-4">A modern portfolio website with custom animations and Tailwind CSS.</p>
+                <button onclick="openPopup('popup2')" class="text-blue-400 hover:text-blue-500 transition-colors">Learn More</button>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+                <img src="/assets/HospitalManagement.png" alt="Project 3" class="w-full h-48 object-cover rounded-xl mb-4">
+                <h4 class="text-2xl font-bold mb-2">Hospital Management</h4>
+                <p class="text-gray-400 mb-4">A Hospital Management Website with user authentication and MongoDB integration.</p>
+                <button onclick="openPopup('popup3')" class="text-blue-400 hover:text-blue-500 transition-colors">Learn More</button>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
+<!-- Popup Modal -->
+<div id="popup1" class="fixed inset-0 bg-black bg-opacity-70 hidden flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-xl max-w-md text-center relative">
+        <button onclick="closePopup('popup1')" class="absolute top-3 right-4 text-black text-2xl font-bold">&times;</button>
+        <h4 class="text-3xl font-bold mb-4 text-gray-900">Education Website</h4>
+        <p class="text-gray-600 mb-2">A fully responsive Educational website built with TypeScript and Node.js.</p>
+        <ul class="text-gray-600 text-left mb-4">
+            <li>- Interactive learning modules</li>
+            <li>- Secure student login system</li>
+            <li>- Mobile-friendly design</li>
+        </ul>
+        <a href="https://techinstitutes.netlify.app/" class="bg-gradient-to-r from-blue-600 to-green-600 hover:from-green-600 hover:to-blue-600 text-white px-6 py-2 rounded-full text-lg font-semibold transition-all shadow-md hover:shadow-lg">Visit Site</a>
+    </div>
+</div>
+
+<div id="popup2" class="fixed inset-0 bg-black bg-opacity-70 hidden flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-xl max-w-md text-center relative">
+        <button onclick="closePopup('popup2')" class="absolute top-3 right-4 text-black text-2xl font-bold">&times;</button>
+        <h4 class="text-3xl font-bold mb-4 text-gray-900">Portfolio Website</h4>
+        <p class="text-gray-600 mb-2">A modern portfolio website with custom animations and Tailwind CSS.</p>
+        <ul class="text-gray-600 text-left mb-4">
+            <li>- Smooth animations and transitions</li>
+            <li>- Dark and light mode support</li>
+            <li>- Optimized for fast performance</li>
+        </ul>
+        <a href="#" class="bg-gradient-to-r from-blue-600 to-green-600 hover:from-green-600 hover:to-blue-600 text-white px-6 py-2 rounded-full text-lg font-semibold transition-all shadow-md hover:shadow-lg">Visit Site</a>
+    </div>
+</div>
+
+<div id="popup3" class="fixed inset-0 bg-black bg-opacity-70 hidden flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-xl max-w-md text-center relative">
+        <button onclick="closePopup('popup3')" class="absolute top-3 right-4 text-black text-2xl font-bold">&times;</button>
+        <h4 class="text-3xl font-bold mb-4 text-gray-900">Hospital Management</h4>
+        <p class="text-gray-600 mb-2">A Hospital Management Website with user authentication and MongoDB integration.</p>
+        <ul class="text-gray-600 text-left mb-4">
+            <li>- User-friendly Website</li>
+            <li>- Secure login and account management</li>
+            <li>- Doctors Appointment Feature</li>
+        </ul>
+        <a href="https://hospital-management-application.netlify.app/" class="bg-gradient-to-r from-blue-600 to-green-600 hover:from-green-600 hover:to-blue-600 text-white px-6 py-2 rounded-full text-lg font-semibold transition-all shadow-md hover:shadow-lg">Visit Site</a>
+    </div>
+</div>
     <!-- Additional Projects Section -->
     <section class="py-20 px-6 bg-gray-800">
         <div class="container mx-auto">
