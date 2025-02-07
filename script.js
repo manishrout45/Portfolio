@@ -67,3 +67,7 @@ function openPopup(id) {
 function closePopup(id) {
     document.getElementById(id).classList.add('hidden');
 }
+
+
+
+
