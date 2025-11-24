@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>No Internet — Play While You Wait</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html,body { height:100%; }
+    .noise {
+      background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 3px 3px;
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+    canvas { image-rendering: pixelated; display:block; }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-800 to-sky-900 text-white flex items-center justify-center p-6 relative">
+  <div class="noise absolute inset-0 opacity-30"></div>
+
+  <main class="relative z-10 w-full max-w-4xl">
+    <section class="bg-white/5 rounded-2xl backdrop-blur-sm shadow-xl p-6 md:p-10 flex flex-col md:flex-row gap-6 items-center">
+
+      <!-- Left: message / actions -->
+      <div class="flex-1">
+        <h1 class="text-3xl font-extrabold text-yellow-300 mb-2">No internet connection</h1>
+        <p class="text-gray-200 mb-4">You're offline — but don't worry. Play a small game while the connection returns, or try reconnecting.</p>
+
+        <div class="flex gap-3 mb-4">
+          <button id="retryBtn" class="px-4 py-2 rounded-lg bg-yellow-400 text-black font-semibold hover:bg-yellow-300">Try reconnect</button>
+          <button id="homeBtn" class="px-4 py-2 rounded-lg border border-white/20">Go to cached homepage</button>
+          <button id="helpBtn" class="px-4 py-2 rounded-lg border border-white/20">Contact support</button>
+        </div>
+
+        <div class="text-sm text-gray-300">Tip: press <span class="px-1 bg-white/10 rounded">←</span> and <span class="px-1 bg-white/10 rounded">→</span> to move, or tap the sides on mobile.</div>
+
+        <div class="mt-6 text-xs text-gray-400">
+          <strong>Status:</strong> <span id="netStatus">Offline</span>
+        </div>
+      </div>
+
+      <!-- Right: game card -->
+      <div class="w-full md:w-96">
+        <div class="bg-white/6 rounded-xl p-4">
+          <div class="flex items-center justify-between mb-3">
+            <div class="text-sm font-semibold">Asteroid Dodger</div>
+            <div class="text-xs text-gray-300">Score: <span id="score">0</span></div>
+          </div>
+
+          <div class="relative">
+            <canvas id="game" width="480" height="320" class="w-full rounded-md bg-black"></canvas>
+            <div id="overlay" class="absolute inset-0 flex items-center justify-center"></div>
+          </div>
+
+          <div class="mt-3 flex gap-2">
+            <button id="startBtn" class="flex-1 px-3 py-2 rounded-md bg-green-500 text-black font-semibold">Start</button>
+            <button id="pauseBtn" class="px-3 py-2 rounded-md bg-amber-500 text-black">Pause</button>
+            <button id="resetBtn" class="px-3 py-2 rounded-md border border-white/20">Reset</button>
+          </div>
+
+          <p class="mt-2 text-xs text-gray-400">Avoid falling asteroids. The game is intentionally lightweight to work offline.</p>
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="mt-6 text-center text-xs text-gray-400">If your browser supports it, this page can be cached for offline use with a service worker.</footer>
+  </main>
+
+  <script>
+    // ---------------------------
+    // Connectivity helpers
+    // ---------------------------
+    const netStatus = document.getElementById('netStatus');
+    function updateNetworkStatus() {
+      netStatus.textContent = navigator.onLine ? 'Online' : 'Offline';
+    }
+    window.addEventListener('online', updateNetworkStatus);
+    window.addEventListener('offline', updateNetworkStatus);
+    updateNetworkStatus();
+
+    document.getElementById('homeBtn').addEventListener('click', () => {
+      // try to go to cached homepage or root
+      window.location.href = '/';
+    });
+    document.getElementById('helpBtn').addEventListener('click', () => {
+      window.location.href = 'mailto:support@example.com?subject=Help%20—%20Offline%20page';
+    });
+
+    // Retry logic: use a small file on your domain (favicon) so fetch returns reliably
+    document.getElementById('retryBtn').addEventListener('click', () => {
+      if (navigator.onLine) { location.reload(); return; }
+
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 3000);
+
+      fetch('/favicon.ico', { method: 'GET', cache: 'no-store', signal: controller.signal })
+        .then(() => {
+          clearTimeout(timeout);
+          location.reload();
+        })
+        .catch(() => {
+          clearTimeout(timeout);
+          alert('Still offline. Try again later.');
+        });
+    });
+
+    // ---------------------------
+    // Game: Asteroid Dodger
+    // ---------------------------
+    (function(){
+      const canvas = document.getElementById('game');
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width, H = canvas.height;
+
+      // Preload images (UFO B and Fireball B)
+      const ufoImg = new Image();
+      const asteroidImg = new Image();
+
+      // UFO: Metallic Sci-Fi UFO (UFO: B)
+      ufoImg.src = 'https://i.imgur.com/yF1uTKb.png';
+      // Fireball / Rocky asteroid with fire (Fireball: B)
+      asteroidImg.src = 'https://i.imgur.com/5DcvhVp.png';
+
+      // Image loaded flags
+      let ufoReady = false, asteroidReady = false;
+      ufoImg.onload = () => { ufoReady = true; };
+      asteroidImg.onload = () => { asteroidReady = true; };
+
+      // Game state
+      let player = { x: W/2 - 18, y: H - 44, w: 36, h: 36, speed: 260 };
+      let asteroids = [];
+      let keys = {};
+      let last = 0;
+      let running = false;
+      let paused = false;
+      let score = 0;
+      let spawnTimer = 0;
+      let spawnInterval = 900; // ms - will decrease to make game harder
+      let timeElapsed = 0;
+
+      const scoreEl = document.getElementById('score');
+      const startBtn = document.getElementById('startBtn');
+      const pauseBtn = document.getElementById('pauseBtn');
+      const resetBtn = document.getElementById('resetBtn');
+      const overlay = document.getElementById('overlay');
+
+      // Utility: clamp
+      const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+      function resetGame(){
+        player.x = W/2 - player.w/2;
+        asteroids = [];
+        score = 0;
+        scoreEl.textContent = score;
+        spawnTimer = 0;
+        spawnInterval = 900;
+        timeElapsed = 0;
+        running = false;
+        paused = false;
+        overlay.innerHTML = '';
+        pauseBtn.textContent = 'Pause';
+      }
+
+      function startGame(){
+        if (!running) {
+          running = true;
+          last = performance.now();
+          requestAnimationFrame(loop);
+        }
+        paused = false;
+      }
+
+      function pauseGame(){
+        paused = !paused;
+        pauseBtn.textContent = paused ? 'Resume' : 'Pause';
+      }
+
+      // spawn asteroid object
+      function spawnAsteroid(){
+        // size roughly proportional to difficulty but with variance
+        const size = 18 + Math.random() * 36;
+        const baseSpeed = 70 + Math.random() * 120;
+        // difficulty factor from timeElapsed: increases steadily
+        const difficultyFactor = 1 + Math.min(3, timeElapsed / 15); // up to ~4x over long sessions
+        asteroids.push({
+          x: Math.random() * (W - size),
+          y: -size,
+          w: size,
+          h: size,
+          speed: baseSpeed * difficultyFactor,
+          rot: Math.random() * 360,
+          rotSpeed: -90 + Math.random() * 180
+        });
+      }
+
+      // main loop
+      function loop(ts){
+        if (!running) return;
+        if (paused) { last = ts; requestAnimationFrame(loop); return; }
+
+        const dtMs = Math.min(40, ts - last);
+        const dt = dtMs / 1000;
+        last = ts;
+        timeElapsed += dt;
+
+        // player input
+        if (keys['ArrowLeft'] || keys['a']) player.x -= player.speed * dt;
+        if (keys['ArrowRight'] || keys['d']) player.x += player.speed * dt;
+        player.x = clamp(player.x, 0, W - player.w);
+
+        // spawn timing & progressive difficulty
+        spawnTimer += dtMs;
+        if (spawnTimer >= spawnInterval) {
+          spawnTimer = 0;
+          // gradually reduce interval (speed up spawns) but not below a threshold
+          spawnInterval = Math.max(180, spawnInterval - 8 - Math.floor(timeElapsed/5)*2);
+          spawnAsteroid();
+        }
+
+        // update asteroids
+        for (let i = asteroids.length - 1; i >= 0; i--) {
+          const a = asteroids[i];
+          a.y += a.speed * dt;
+          a.rot += a.rotSpeed * dt;
+          if (a.y > H + 60) {
+            asteroids.splice(i, 1);
+            score += 1;
+            scoreEl.textContent = score;
+          }
+        }
+
+        // collision detection (AABB)
+        const px = player.x, py = player.y, pw = player.w, ph = player.h;
+        for (let a of asteroids) {
+          if (px < a.x + a.w && px + pw > a.x && py < a.y + a.h && py + ph > a.y) {
+            // collision
+            running = false;
+            showGameOver();
+            return;
+          }
+        }
+
+        draw();
+        requestAnimationFrame(loop);
+      }
+
+      // draw the frame
+      function draw(){
+        ctx.clearRect(0, 0, W, H);
+
+        // subtle starfield
+        for (let i = 0; i < 60; i++) {
+          ctx.fillStyle = 'rgba(255,255,255,0.02)';
+          ctx.fillRect((i * 47) % W, (i * 31) % H, 1, 1);
+        }
+
+        // draw player (UFO) - if image not loaded, fallback rectangle
+        if (ufoReady) {
+          // slight vertical bob for liveliness
+          const bob = Math.sin(timeElapsed * 6) * 2;
+          ctx.drawImage(ufoImg, player.x - 6, player.y - 6 + bob, player.w + 12, player.h + 12);
+        } else {
+          ctx.fillStyle = '#fff';
+          ctx.fillRect(player.x, player.y, player.w, player.h);
+          ctx.fillStyle = '#00b4d8';
+          ctx.fillRect(player.x + 6, player.y + 6, player.w - 12, player.h - 12);
+        }
+
+        // draw asteroids (fire/rock)
+        asteroids.forEach(a => {
+          ctx.save();
+          ctx.translate(a.x + a.w / 2, a.y + a.h / 2);
+          ctx.rotate(a.rot * Math.PI / 180);
+          if (asteroidReady) {
+            ctx.drawImage(asteroidImg, -a.w/2, -a.h/2, a.w, a.h);
+          } else {
+            ctx.fillStyle = '#bfbfbf';
+            ctx.fillRect(-a.w/2, -a.h/2, a.w, a.h);
+          }
+          ctx.restore();
+        });
+      }
+
+      function showGameOver(){
+        overlay.innerHTML = `
+          <div class="absolute inset-0 bg-black/60 flex items-center justify-center rounded-md">
+            <div class="text-center">
+              <div class="text-xl font-bold mb-2">Game Over</div>
+              <div class="mb-3">Score: <strong id="finalScore">${score}</strong></div>
+              <div class="flex gap-2 justify-center">
+                <button id="again" class="px-3 py-2 rounded bg-green-500 text-black">Play again</button>
+                <button id="share" class="px-3 py-2 rounded border border-white/20">Close</button>
+              </div>
+            </div>
+          </div>
+        `;
+        // attach listeners AFTER element exists
+        const againBtn = document.getElementById('again');
+        const shareBtn = document.getElementById('share');
+        if (againBtn) {
+          againBtn.addEventListener('click', () => {
+            resetGame();
+            startGame();
+          });
+        }
+        if (shareBtn) {
+          shareBtn.addEventListener('click', () => {
+            overlay.innerHTML = '';
+          });
+        }
+      }
+
+      // input handlers
+      window.addEventListener('keydown', (e) => { keys[e.key] = true; });
+      window.addEventListener('keyup', (e) => { keys[e.key] = false; });
+
+      // Touch controls: tap left/right side to move while touching
+      let touchActive = false;
+      canvas.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        touchActive = true;
+        const rect = canvas.getBoundingClientRect();
+        const x = e.touches[0].clientX - rect.left;
+        if (x < rect.width / 2) { keys['ArrowLeft'] = true; keys['ArrowRight'] = false; }
+        else { keys['ArrowRight'] = true; keys['ArrowLeft'] = false; }
+      }, { passive: false });
+
+      canvas.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        const rect = canvas.getBoundingClientRect();
+        const x = e.touches[0].clientX - rect.left;
+        if (x < rect.width / 2) { keys['ArrowLeft'] = true; keys['ArrowRight'] = false; }
+        else { keys['ArrowRight'] = true; keys['ArrowLeft'] = false; }
+      }, { passive: false });
+
+      canvas.addEventListener('touchend', (e) => {
+        touchActive = false;
+        keys['ArrowLeft'] = false; keys['ArrowRight'] = false;
+      });
+
+      // Button hookups
+      startBtn.addEventListener('click', () => startGame());
+      pauseBtn.addEventListener('click', () => pauseGame());
+      resetBtn.addEventListener('click', () => resetGame());
+
+      // Initialize
+      resetGame();
+
+      // Optional: if images are blocked (offline), we still run using shapes
+      // Preload complete: we already set onload flags; nothing else needed.
+
+    })();
+  </script>
+</body>
+</html>
